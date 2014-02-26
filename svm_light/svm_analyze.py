@@ -2,36 +2,40 @@
 from subprocess import call
 import sys
 
-categories = ['dropout', 'parent', 'PBIS', 'RTI', 'support', 'teaming', 'health']
 
-def train():
+def train(categories):
     for c in categories:
         call(["./svm_learn", c + "/" + c + "_train.dat", c + "/model"])
 
-def classify():
+def classify(categories):
     for c in categories:
         call(["./svm_classify", c + "/test.dat", c + "/model", c + "/predictions"])
 
-def train_nc():
+def train_nc(categories):
     for c in categories:
         call(["./svm_learn", c + "/train_nc.dat", c + "/model_nc"])
 
-def classify_nc():
+def classify_nc(categories):
     for c in categories:
         call(["./svm_classify", c + "/test_nc.dat", c + "/model_nc", c + "/predictions_nc"])
 
 
 def main(argv):
+    #categories = ['dropout', 'parent', 'PBIS', 'RTI', 'support', 'teaming', 'health']
+    categories = ['dropout_2', 'parent_2', 'PBIS_2', 'RTI_2', 'support_2', 'teaming_2', 'health_2']
+    #categories = ['dropout_3', 'parent_3', 'PBIS_3', 'RTI_3', 'support_3', 'teaming_3', 'health_3']
+
+
     if len(argv) == 1:
-        train()
-        classify()
+        train(categories)
+        classify(categories)
     elif (argv[1] == 'train'):
-        train()
+        train(categories)
     elif (argv[1] == 'classify'):
-        classify()
+        classify(categories)
     elif (argv[1] == 'nc'):
-        train_nc()
-        classify_nc()
+        train_nc(categories)
+        classify_nc(categories)
 
 if __name__ == "__main__":
     main(sys.argv)
