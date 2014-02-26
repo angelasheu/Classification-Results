@@ -2,7 +2,7 @@
 from subprocess import call
 import sys
 
-postfix = '_tri'
+postfix = ''
 
 def train(categories):
     for c in categories:
@@ -25,8 +25,8 @@ def classify_nc(categories):
 def main(argv):
     #categories = ['dropout', 'parent', 'PBIS', 'RTI', 'support', 'teaming', 'health']
     #categories = ['dropout_2', 'parent_2', 'PBIS_2', 'RTI_2', 'support_2', 'teaming_2', 'health_2']
-    #categories = ['dropout_3', 'parent_3', 'PBIS_3', 'RTI_3', 'support_3', 'teaming_3', 'health_3']
-    categories = ['group1', 'group2', 'group3']
+    categories = ['dropout_3', 'parent_3', 'PBIS_3', 'RTI_3', 'support_3', 'teaming_3', 'health_3']
+    #categories = ['group1', 'group2', 'group3']
 
     if len(argv) == 1:
         train(categories)
