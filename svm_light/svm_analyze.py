@@ -2,14 +2,16 @@
 from subprocess import call
 import sys
 
+postfix = ''
 
 def train(categories):
     for c in categories:
-        call(["./svm_learn", c + "/" + c + "_train.dat", c + "/model"])
+        call(["./svm_learn", c + "/" + c + postfix + "_train.dat", c + "/model" + postfix])
 
 def classify(categories):
     for c in categories:
-        call(["./svm_classify", c + "/test.dat", c + "/model", c + "/predictions"])
+        print c, "/predictions", postfix
+        call(["./svm_classify", c + "/test" + postfix + ".dat", c + "/model" + postfix, c + "/predictions" + postfix])
 
 def train_nc(categories):
     for c in categories:
@@ -22,9 +24,9 @@ def classify_nc(categories):
 
 def main(argv):
     #categories = ['dropout', 'parent', 'PBIS', 'RTI', 'support', 'teaming', 'health']
-    categories = ['dropout_2', 'parent_2', 'PBIS_2', 'RTI_2', 'support_2', 'teaming_2', 'health_2']
+    #categories = ['dropout_2', 'parent_2', 'PBIS_2', 'RTI_2', 'support_2', 'teaming_2', 'health_2']
     #categories = ['dropout_3', 'parent_3', 'PBIS_3', 'RTI_3', 'support_3', 'teaming_3', 'health_3']
-
+    categories = ['group1', 'group2', 'group3']
 
     if len(argv) == 1:
         train(categories)
