@@ -2,7 +2,7 @@
 from subprocess import call
 import sys
 
-postfix = ''
+postfix = '_0'
 
 def train(categories):
     for c in categories:
