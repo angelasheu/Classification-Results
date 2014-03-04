@@ -27,8 +27,10 @@ def main(argv):
     #categories = ['dropout_2', 'parent_2', 'PBIS_2', 'RTI_2', 'support_2', 'teaming_2', 'health_2']
     #categories = ['dropout_3', 'parent_3', 'PBIS_3', 'RTI_3', 'support_3', 'teaming_3', 'health_3']
     #categories = ['group1', 'group2', 'group3']
-    categories = ['3c_1', '3c_2', '3c_3']
+    #categories = ['3c_1', '3c_2', '3c_3']
     #categories = ['4c_1', '4c_2', '4c_3', '4c_4']
+    #categories = ['5c_1', '5c_2', '5c_3', '5c_4', '5c_5']
+    categories = ['6c_1', '6c_2', '6c_3', '6c_4', '6c_5', '6c_6']
 
     if len(argv) == 1:
         train(categories)
