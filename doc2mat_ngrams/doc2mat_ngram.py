@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.util import ngrams
 
-n = 2 # n-gram parameter
+n = 3 # n-gram parameter
 ngram_set = set()
 
 '''
@@ -31,12 +31,16 @@ def stem_words(docs):
 Populates set of all nGrams, transforms each of documents into a list of ngram tuples.
 '''
 def getNGrams(docs):
-    for i in range(len(docs)):
-        joined_words = ' '.join(docs[i])
-        grams = ngrams(joined_words.split(), n)
-        for gram in grams:
-            ngram_set.add(tuple(gram))
-        docs[i] = grams
+    docs_copy = list(docs)
+    n = 1
+    for _ in range(3):
+        for i in range(len(docs)):
+            joined_words = ' '.join(docs_copy[i])
+            grams = ngrams(joined_words.split(), n)
+            for gram in grams:
+                ngram_set.add(tuple(gram))
+            docs[i] = grams
+        n += 1
 # Add n-gram to hashset
 
 '''
