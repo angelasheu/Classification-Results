@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.util import ngrams
 
-n = 3 # n-gram parameter
+n = 2 # n-gram parameter
 ngram_set = set()
 
 '''
@@ -76,7 +76,7 @@ def process_vectors(doc_vectors):
 
 def main(argv):
     inputfile = argv[0]
-    matfilename = argv[1] if len(argv) > 1 else 'matfile';
+    matfilename = argv[1] if len(argv) > 1 else inputfile + 'matfile';
     fo = open(inputfile)
     file_content = fo.read();
     fo.close();
