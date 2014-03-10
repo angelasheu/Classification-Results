@@ -1,4 +1,4 @@
-# SVM Classification augmented with clustering. 
+# SVM Classification augmented with clustering 
 Used doc2mat to convert text files to .mat files that were then converted to .dat files for
 classification using SVM light. Clusters computed using cluto. 
 
@@ -13,8 +13,15 @@ test_documents_key corresponds to the correct classification for the test docume
 ## doc2mat-1.0:
 *tfidf.py*- transforms a given matfile (generated from running doc2mat script) into .dat file.
 
-Input arguments: [name of .mat file] [name of .dat file (optional]
+Input arguments: [name of .mat file] [name of .dat file (optional)]
 
 ## Clustering results found in svm_light
 *3c_, 4c_, 5c_*- clustering done with 3, 4, and 5 clusters respectively, using TF-IDF of trigrams. Training documents put into groups based on 
 clustering performed with only the training documents (as opposed to with the testing docs). 
+
+## cte files
+Classification performed with larger data set, using 'categorized_text_edited.txt'.
+doc2mat_cte.py- converts categorized_text_edited.txt into docfile compatible with cluto and generates corresponding .rlabel file. 
+
+## full_data_plots:
+.ps files for cte_docfile
