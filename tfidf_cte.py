@@ -4,10 +4,11 @@ from __future__ import division
 import sys
 import numpy
 import re
+import os
 from numpy import linalg as LA
 
 # Change this to get correct categories
-clustering_num = 5
+clustering_num = 7
 
 def count_doc_frequency(docs):
     # Initialize dictionary
@@ -44,6 +45,7 @@ def get_cats():
 
     fo = open('cte_matfile.clustering.' + str(clustering_num))
     cluster_nums = fo.read().split('\n')[:-1]
+    print 'CLUSTER_NUMS: ', cluster_nums
     fo.close()
 
     fo = open('tfidf_labels')
@@ -61,6 +63,7 @@ def get_cats():
                     cats[cluster].append(i+1)
 
     ret_list = []
+    print 'DICTIONARY: ', cats
     for key in cats:
         c_list = cats[key]
         c_list.sort()
@@ -97,9 +100,13 @@ def create_dat_file(vector_list):
                     labels.append(l)
         vec_labels_list.append(labels)
 
-    # Create a _train.dat file for each category
+    # Create a _train.dat file for each category in its own folder
+
     for c in cats:
-        filename = 'cat' + str(c) + '_train.dat'
+        directory = 'cat' + str(c)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        filename = directory + '/cat' + str(c) + '_train.dat'
         target = open(filename, 'w')
         count = 0
         for v in vector_list:
