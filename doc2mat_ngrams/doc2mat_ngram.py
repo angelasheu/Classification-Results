@@ -39,7 +39,12 @@ def getNGrams(docs):
             grams = ngrams(joined_words.split(), n)
             for gram in grams:
                 ngram_set.add(tuple(gram))
-            docs[i] = grams
+            if _ == 0:
+                docs[i] = grams
+            else:
+                if grams != []:
+                    docs[i].append(grams)
+            #docs[i] = grams # Need to fix
         n += 1
 # Add n-gram to hashset
 
@@ -51,6 +56,7 @@ def vectorize(docs, all_ngrams):
     for i in range(len(docs)):
         doc = docs[i]
         doc_vector = [0 for x in range(len(all_ngrams))]
+
         for gram in doc:
             gram = tuple(gram)
             if gram in all_ngrams:
@@ -83,9 +89,16 @@ def main(argv):
     docs = file_content.split('\n')[:-1]
 
     eliminate_stopwords(docs)
+    print 'eliminated stop words'
+
     stem_words(docs)
+    print 'stemmed words'
+
+
     getNGrams(docs)
+    print 'processed ngrams'
     all_ngrams = list(ngram_set)
+
     document_vectors = vectorize(docs, all_ngrams)
     doc_vec_str, non_zero_entries = process_vectors(document_vectors)
 
