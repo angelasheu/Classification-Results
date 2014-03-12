@@ -33,6 +33,7 @@ def main(argv):
     #categories = ['6c_1', '6c_2', '6c_3', '6c_4', '6c_5', '6c_6']
     #categories = ['short_support', 'short_wellness', 'short_RTI', 'short_parent']
     categories = ['cat1', 'cat2', 'cat3', 'cat5', 'cat6', 'cat9', 'cat10', 'cat13', 'cat14']
+    categories = ['cat[1, 3, 6, 9, 13]', 'cat[2, 9]', 'cat[4, 6, 10]', 'cat[5, 9, 14]', 'cat[6, 9]']
 
     if len(argv) == 1:
         train(categories)
