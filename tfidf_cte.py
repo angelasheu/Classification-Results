@@ -6,6 +6,9 @@ import numpy
 import re
 from numpy import linalg as LA
 
+# Change this to get correct categories
+clustering_num = 5
+
 def count_doc_frequency(docs):
     # Initialize dictionary
     words_total = docs[0].split(' ')[1]
@@ -35,10 +38,45 @@ def compute_tfidf(docs, wc_dict):
         vector_list.append((vector, id_list))
     return vector_list
 
+def get_cats():
+
+    cats = {}
+
+    fo = open('cte_matfile.clustering.' + str(clustering_num))
+    cluster_nums = fo.read().split('\n')[:-1]
+    fo.close()
+
+    fo = open('tfidf_labels')
+    labels = fo.read().split('\n')[:-1]
+    fo.close()
+
+    for i in range(0, len(cluster_nums)):
+        tr_label = [re.sub(' ', '', s) for s in (re.sub('[\[\]]', '', labels[i])).split(',')]
+        cluster = cluster_nums[i]
+        for i in range(len(tr_label)):
+            if tr_label[i] == "'*'":
+                if cluster not in cats:
+                    cats[cluster] = []
+                if (i+1) not in cats[cluster]:
+                    cats[cluster].append(i+1)
+
+    ret_list = []
+    for key in cats:
+        c_list = cats[key]
+        c_list.sort()
+        ret_list.append(c_list)
+
+    return ret_list
+
+
 def create_dat_file(vector_list):
 
     #cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
-    cats = [ [4, 6, 10], [1, 3, 6, 9, 13], [2, 9], [5, 9, 14], [6, 9] ]
+    #cats = [ [4, 6, 10], [1, 3, 6, 9, 13], [2, 9], [5, 9, 14], [6, 9] ]
+    cats = get_cats()
+
+    print 'CATS: ', cats
+
     fo = open('tfidf_labels')
     file_content = fo.read()
     fo.close()
