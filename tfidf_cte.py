@@ -37,7 +37,8 @@ def compute_tfidf(docs, wc_dict):
 
 def create_dat_file(vector_list):
 
-    cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
+    #cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
+    cats = [ [4, 6, 10], [1, 3, 6, 9, 13], [2, 9], [5, 9, 14], [6, 9] ]
     fo = open('tfidf_labels')
     file_content = fo.read()
     fo.close()
@@ -47,9 +48,15 @@ def create_dat_file(vector_list):
     for i in range(0, len(lines)):
         labels = []
         c = [re.sub(' ', '', s) for s in (re.sub('[\[\]]', '', lines[i])).split(',')]
+        '''
         for j in cats:
             if c[j-1] == "'*'":
                 labels.append(j)
+        '''
+        for j in cats:
+            for l in j:
+                if c[l-1] == "'*'":
+                    labels.append(l)
         vec_labels_list.append(labels)
 
     # Create a _train.dat file for each category
@@ -64,10 +71,22 @@ def create_dat_file(vector_list):
             comb_list = zip(v[1], v[0])
             comb_list.sort()
 
+            set_true = False
+            for c_s in c:
+                if c_s in labels: set_true = True
+
+
+            if set_true:
+                target.write('1 ')
+            else:
+                target.write('-1 ')
+
+            '''
             if c in labels:
                 target.write('1 ')
             else:
                 target.write('-1 ')
+            '''
 
             for i in range(len(comb_list)):
                 target.write(str(comb_list[i][0]) + ':' + str(comb_list[i][1]) + ' ')
