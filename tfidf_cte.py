@@ -71,6 +71,55 @@ def get_cats():
 
     return ret_list
 
+# Creat .dat file using clusters as categories
+def create_dat_file_10(vector_list):
+    cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
+    fo = open('tfidf_labels')
+    file_content = fo.read()
+    fo.close()
+
+    lines = file_content.split('\n')[:-1]
+    vec_labels_list = []
+    for i in range(0, len(lines)):
+        labels = []
+        c = [re.sub(' ', '', s) for s in (re.sub('[\[\]]', '', lines[i])).split(',')]
+        for j in cats:
+            if c[j-1] == "'*'":
+                labels.append(j)
+        vec_labels_list.append(labels)
+
+    # Create a _train.dat file for each category
+    for c in cats:
+        directory = 'cat' + str(c)
+        #filename = 'cat' + str(c) + '_train.dat'
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        filename = directory + '/cat' + str(c) + '_train.dat'
+
+
+        target = open(filename, 'w')
+        count = 0
+        for v in vector_list:
+            labels = vec_labels_list[count]
+
+            # Combine feature # and count together
+            comb_list = zip(v[1], v[0])
+            comb_list.sort()
+
+            if c in labels:
+                target.write('1 ')
+            else:
+                target.write('-1 ')
+
+            for i in range(len(comb_list)):
+                target.write(str(comb_list[i][0]) + ':' + str(comb_list[i][1]) + ' ')
+            target.write('\n')
+            count += 1
+
+        print filename, ' written'
+        target.close()
+
 
 def create_dat_file(vector_list):
 
@@ -89,11 +138,7 @@ def create_dat_file(vector_list):
     for i in range(0, len(lines)):
         labels = []
         c = [re.sub(' ', '', s) for s in (re.sub('[\[\]]', '', lines[i])).split(',')]
-        '''
-        for j in cats:
-            if c[j-1] == "'*'":
-                labels.append(j)
-        '''
+
         for j in cats:
             for l in j:
                 if c[l-1] == "'*'":
@@ -126,13 +171,6 @@ def create_dat_file(vector_list):
             else:
                 target.write('-1 ')
 
-            '''
-            if c in labels:
-                target.write('1 ')
-            else:
-                target.write('-1 ')
-            '''
-
             for i in range(len(comb_list)):
                 target.write(str(comb_list[i][0]) + ':' + str(comb_list[i][1]) + ' ')
             target.write('\n')
@@ -150,7 +188,8 @@ def main(argv):
     docs = file_content.split('\n')[:-1]
     wc_dict = count_doc_frequency(docs)
     vector_list = compute_tfidf(docs[1:], wc_dict)
-    create_dat_file(vector_list)
+    create_dat_file_10(vector_list)
+    #create_dat_file(vector_list)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
