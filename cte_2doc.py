@@ -28,14 +28,31 @@ def main():
     file_content = fo.read();
     fo.close();
     docs = file_content.split('*DELIM*')
+
     process_docs(docs)
 
+    testfile = 'testing_docs'
+    fo = open(testfile)
+    test_content = fo.read()
+    fo.close()
+    test_docs = test_content.split('\n')
+
+    test_labels_file = 'testing_labels'
+    fo = open(test_labels_file)
+    file_content = fo.read()
+    fo.close()
+    test_labels = file_content.split('\n')
+
     target = open(docfilename, 'w')
-    clabel = open(docfilename + '.rlabel', 'w');
+    clabel = open('cte_matfile.rlabel', 'w');
     for i in range(1, len(docs)):
         clabel.write(docs[i][0] + '\n');
         target.write(docs[i][1] + '\n');
+    for i in range(0, len(test_docs)):
+        clabel.write(test_labels[i] + '\n')
+        target.write(test_docs[i] + '\n')
     target.close()
+    clabel.close()
 
     print 'categories in training set: ', categories_seen
 

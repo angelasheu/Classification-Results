@@ -80,6 +80,8 @@ def create_dat_file_10(vector_list):
 
     lines = file_content.split('\n')[:-1]
     vec_labels_list = []
+
+    # Only for training set; current testing set is 20 documents
     for i in range(0, len(lines)):
         labels = []
         c = [re.sub(' ', '', s) for s in (re.sub('[\[\]]', '', lines[i])).split(',')]
@@ -87,6 +89,7 @@ def create_dat_file_10(vector_list):
             if c[j-1] == "'*'":
                 labels.append(j)
         vec_labels_list.append(labels)
+
 
     # Create a _train.dat file for each category
     for c in cats:
@@ -100,7 +103,12 @@ def create_dat_file_10(vector_list):
 
         target = open(filename, 'w')
         count = 0
+
         for v in vector_list:
+
+            # Ugly error handling. 68 is end of training docs
+            if (count == 68):
+                break
             labels = vec_labels_list[count]
 
             # Combine feature # and count together
@@ -119,6 +127,27 @@ def create_dat_file_10(vector_list):
 
         print filename, ' written'
         target.close()
+
+
+
+    # Write testing files
+
+    target = open('test.dat', 'w')
+    for i in range(68, len(vector_list)):
+        v = vector_list[i]
+        comb_list = zip(v[1], v[0])
+        comb_list.sort()
+
+        # By default, just label everything in testing set as negative
+        target.write('-1 ')
+
+        for j in range(len(comb_list)):
+            target.write(str(comb_list[j][0]) + ':' + str(comb_list[j][1]) + ' ')
+        if (i != len(vector_list)-1):
+            target.write('\n')
+    print 'test.dat written'
+    target.close()
+
 
 
 def create_dat_file(vector_list):
