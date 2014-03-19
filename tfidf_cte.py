@@ -71,6 +71,24 @@ def get_cats():
 
     return ret_list
 
+
+def write_test_files(vector_list):
+    target = open('test.dat', 'w')
+    for i in range(68, len(vector_list)):
+        v = vector_list[i]
+        comb_list = zip(v[1], v[0])
+        comb_list.sort()
+
+        # By default, just label everything in testing set as negative
+        target.write('-1 ')
+
+        for j in range(len(comb_list)):
+            target.write(str(comb_list[j][0]) + ':' + str(comb_list[j][1]) + ' ')
+        if (i != len(vector_list)-1):
+            target.write('\n')
+    print 'test.dat written'
+    target.close()
+
 # Creat .dat file using clusters as categories
 def create_dat_file_10(vector_list):
     cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
@@ -131,7 +149,9 @@ def create_dat_file_10(vector_list):
 
 
     # Write testing files
+    write_test_files(vector_list)
 
+    '''
     target = open('test.dat', 'w')
     for i in range(68, len(vector_list)):
         v = vector_list[i]
@@ -147,13 +167,10 @@ def create_dat_file_10(vector_list):
             target.write('\n')
     print 'test.dat written'
     target.close()
-
+    '''
 
 
 def create_dat_file(vector_list):
-
-    #cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
-    #cats = [ [4, 6, 10], [1, 3, 6, 9, 13], [2, 9], [5, 9, 14], [6, 9] ]
     cats = get_cats()
 
     print 'CATS: ', cats
@@ -184,6 +201,10 @@ def create_dat_file(vector_list):
         target = open(filename, 'w')
         count = 0
         for v in vector_list:
+
+            # More ugly error handling
+            if (count == 68):
+                break
             labels = vec_labels_list[count]
 
             # Combine feature # and count together
@@ -208,6 +229,8 @@ def create_dat_file(vector_list):
         print filename, ' written'
         target.close()
 
+    write_test_files(vector_list)
+
 
 def main(argv):
     inputfile = argv[0]
@@ -217,8 +240,8 @@ def main(argv):
     docs = file_content.split('\n')[:-1]
     wc_dict = count_doc_frequency(docs)
     vector_list = compute_tfidf(docs[1:], wc_dict)
-    create_dat_file_10(vector_list)
-    #create_dat_file(vector_list)
+    #create_dat_file_10(vector_list)
+    create_dat_file(vector_list)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
