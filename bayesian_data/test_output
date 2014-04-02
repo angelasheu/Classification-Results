@@ -30,6 +30,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 0.9333
 
  *********** CATEGORY 2**********
 TD 0; Expected: false Returned: true
@@ -62,6 +63,7 @@ TD 26; Expected: false Returned: true
 TD 27; Expected: false Returned: true
 TD 28; Expected: false Returned: true
 TD 29; Expected: false Returned: true
+Accuracy: 0.4333
 
  *********** CATEGORY 3**********
 TD 0; Expected: true Returned: true
@@ -94,6 +96,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: true
+Accuracy: 0.6667
 
  *********** CATEGORY 5**********
 TD 0; Expected: false Returned: false
@@ -126,6 +129,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 0.9667
 
  *********** CATEGORY 6**********
 TD 0; Expected: true Returned: false
@@ -158,6 +162,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 0.7667
 
  *********** CATEGORY 9**********
 TD 0; Expected: false Returned: false
@@ -190,6 +195,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 0.8667
 
  *********** CATEGORY 10**********
 TD 0; Expected: true Returned: true
@@ -222,6 +228,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 1.000
 
  *********** CATEGORY 13**********
 TD 0; Expected: true Returned: true
@@ -254,6 +261,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: true
+Accuracy: 0.6667
 
  *********** CATEGORY 14**********
 TD 0; Expected: false Returned: false
@@ -286,6 +294,7 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 0.9667
 
  *********** CATEGORY BIN **********
 TD 0; Expected: true Returned: true
@@ -318,3 +327,4 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+Accuracy: 0.6000

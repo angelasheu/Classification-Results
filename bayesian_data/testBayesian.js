@@ -49,6 +49,7 @@ var expected;
 for (var i = 0; i < classifiers.length; i++) {
     var category = categories[i];
     var classifier = classifiers[i];
+    var trueCount = 0;
 
     console.log('\n *********** CATEGORY ' + category + '**********');
 
@@ -57,18 +58,27 @@ for (var i = 0; i < classifiers.length; i++) {
         var trueCats = catArr[j];
         result = classifier.classify(testDoc);
         expected = trueCats.indexOf(category) != -1;
+        if (expected.toString() == result) {
+            trueCount++;
+        }
 
         console.log('TD ' + j + '; ' + 'Expected: ' + expected + " Returned: " + result);
     }
+    console.log('Accuracy: ' + (trueCount/testArr.length).toPrecision(4));
 }
 
 // Testing for classifier_bin; classifier is bayesBin
+var trueCount = 0;
 console.log('\n *********** CATEGORY BIN **********');
 for (var j = 0; j < testArr.length; j++) {
     var testDoc = testArr[j];
     var trueCats = catArr[j];
     result = bayesBin.classify(testDoc);
     expected = trueCats.length > 0;
-    console.log('TD ' + j + '; ' + 'Expected: ' + expected + " Returned: " + result);
+    if (expected.toString() == result) {
+        trueCount++;
+    }
 
+    console.log('TD ' + j + '; ' + 'Expected: ' + expected + " Returned: " + result);
 }
+console.log('Accuracy: ' + (trueCount/testArr.length).toPrecision(4));
