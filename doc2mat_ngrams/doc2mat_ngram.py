@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 import string
 from nltk.corpus import stopwords
@@ -85,6 +86,7 @@ def main(argv):
     matfilename = argv[1] if len(argv) > 1 else inputfile + 'matfile';
     fo = open(inputfile)
     file_content = fo.read();
+    print 'Read file content'
     fo.close();
     docs = file_content.split('\n')[:-1]
 
