@@ -286,3 +286,35 @@ TD 26; Expected: false Returned: false
 TD 27; Expected: false Returned: false
 TD 28; Expected: false Returned: false
 TD 29; Expected: false Returned: false
+
+ *********** CATEGORY BIN **********
+TD 0; Expected: true Returned: true
+TD 1; Expected: true Returned: false
+TD 2; Expected: true Returned: true
+TD 3; Expected: true Returned: true
+TD 4; Expected: true Returned: false
+TD 5; Expected: true Returned: true
+TD 6; Expected: true Returned: true
+TD 7; Expected: true Returned: true
+TD 8; Expected: true Returned: false
+TD 9; Expected: true Returned: false
+TD 10; Expected: true Returned: false
+TD 11; Expected: true Returned: false
+TD 12; Expected: true Returned: false
+TD 13; Expected: true Returned: false
+TD 14; Expected: true Returned: false
+TD 15; Expected: true Returned: false
+TD 16; Expected: true Returned: true
+TD 17; Expected: true Returned: false
+TD 18; Expected: true Returned: true
+TD 19; Expected: true Returned: false
+TD 20; Expected: false Returned: false
+TD 21; Expected: false Returned: false
+TD 22; Expected: false Returned: false
+TD 23; Expected: false Returned: false
+TD 24; Expected: false Returned: false
+TD 25; Expected: false Returned: false
+TD 26; Expected: false Returned: false
+TD 27; Expected: false Returned: false
+TD 28; Expected: false Returned: false
+TD 29; Expected: false Returned: false

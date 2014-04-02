@@ -1,12 +1,5 @@
 var fs = require('fs');
 var classifier = require('classifier');
-//var jsonString, jsonObj;
-
-/*
-bayes = new classifier.Bayesian();
-jsonString = fs.readFileSync('classifierJSON_9', 'utf8');
-jsonObj = JSON.parse(jsonString);
-bayes.fromJSON(jsonObj);*/
 
 var categories = [1, 2, 3, 5, 6, 9, 10, 13, 14];
 var classifiers = new Array(9);
@@ -20,6 +13,12 @@ for (var i = 0; i < categories.length; i++) {
     bayes.fromJSON(jsonObj);
     classifiers[i] = bayes;
 }
+
+// Classifier for whether relevant or not
+var bayesBin = new classifier.Bayesian();
+var jsonString = fs.readFileSync('classifierJSON_bin', 'utf8');
+var jsonObj = JSON.parse(jsonString);
+bayesBin.fromJSON(jsonObj);
 
 
 // Get correct labels for testing documents
@@ -47,21 +46,6 @@ for (var i = 0; i < testLabels.length; i++) {
 var result;
 var expected;
 
-/*
-for (var i = 0; i < testArr.length; i++) {
-    console.log('\n *********** TEST DOC ' + i + '**********');
-    var testDoc = testArr[i];
-    var trueCats = catArr[i];
-    for (var j = 0; j < classifiers.length; j++) {
-        var category = categories[j];
-        var classifier = classifiers[j];
-        result = classifier.classify(testDoc);
-        expected = trueCats.indexOf(category) != -1;
-
-        console.log('CAT ' + category + '; ' + 'Expected: ' + expected + " Returned: " + result);
-    }
-}*/
-
 for (var i = 0; i < classifiers.length; i++) {
     var category = categories[i];
     var classifier = classifiers[i];
@@ -78,7 +62,13 @@ for (var i = 0; i < classifiers.length; i++) {
     }
 }
 
+// Testing for classifier_bin; classifier is bayesBin
+console.log('\n *********** CATEGORY BIN **********');
+for (var j = 0; j < testArr.length; j++) {
+    var testDoc = testArr[j];
+    var trueCats = catArr[j];
+    result = bayesBin.classify(testDoc);
+    expected = trueCats.length > 0;
+    console.log('TD ' + j + '; ' + 'Expected: ' + expected + " Returned: " + result);
 
-
-
-
+}
