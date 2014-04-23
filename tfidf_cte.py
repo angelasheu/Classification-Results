@@ -74,7 +74,7 @@ def get_cats():
 
 def write_test_files(vector_list):
     target = open('test.dat', 'w')
-    for i in range(68, len(vector_list)):
+    for i in range(0, len(vector_list)):
         v = vector_list[i]
         comb_list = zip(v[1], v[0])
         comb_list.sort()
@@ -125,8 +125,8 @@ def create_dat_file_10(vector_list):
         for v in vector_list:
 
             # Ugly error handling. 68 is end of training docs
-            if (count == 68):
-                break
+            #if (count == 68):
+                #break
             labels = vec_labels_list[count]
 
             # Combine feature # and count together
@@ -149,25 +149,8 @@ def create_dat_file_10(vector_list):
 
 
     # Write testing files
-    write_test_files(vector_list)
+    #write_test_files(vector_list)
 
-    '''
-    target = open('test.dat', 'w')
-    for i in range(68, len(vector_list)):
-        v = vector_list[i]
-        comb_list = zip(v[1], v[0])
-        comb_list.sort()
-
-        # By default, just label everything in testing set as negative
-        target.write('-1 ')
-
-        for j in range(len(comb_list)):
-            target.write(str(comb_list[j][0]) + ':' + str(comb_list[j][1]) + ' ')
-        if (i != len(vector_list)-1):
-            target.write('\n')
-    print 'test.dat written'
-    target.close()
-    '''
 
 
 def create_dat_file(vector_list):
@@ -227,7 +210,7 @@ def create_dat_file(vector_list):
         print filename, ' written'
         target.close()
 
-    write_test_files(vector_list)
+    #write_test_files(vector_list)
 
 def create_dat_file_binary(vector_list):
     cats = [1, 2, 3, 5, 6, 9, 10, 13, 14]
@@ -284,20 +267,33 @@ def create_dat_file_binary(vector_list):
     print filename, ' written'
     target.close()
 
-    write_test_files(vector_list)
+    #write_test_files(vector_list)
 
 
 def main(argv):
+    # Takes in matfile
     inputfile = argv[0]
+    testfile = argv[1]
     fo = open(inputfile)
     file_content = fo.read();
     fo.close();
     docs = file_content.split('\n')[:-1]
+
+    fo = open(testfile)
+    file_content = fo.read()
+    fo.close()
+    test = file_content.split('\n')[:-1]
+
     wc_dict = count_doc_frequency(docs)
     vector_list = compute_tfidf(docs[1:], wc_dict)
-    #create_dat_file_10(vector_list)
+    create_dat_file_10(vector_list)
+
+    wc_dict_test = count_doc_frequency(test)
+    test_list = compute_tfidf(test[1:], wc_dict_test)
+    write_test_files(test_list)
+
     #create_dat_file(vector_list)
-    create_dat_file_binary(vector_list)
+    #create_dat_file_binary(vector_list)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
