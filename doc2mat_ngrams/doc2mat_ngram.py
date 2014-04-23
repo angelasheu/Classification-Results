@@ -164,9 +164,6 @@ def main(argv):
 
     print 'Before dimensionality reduction, num_features is ', len(all_ngrams)
 
-    # First line of matfile needs to contain (num_docs, num_columns, num_non_zero_entries)
-    num_docs = len(docs)
-    num_columns = len(all_ngrams)
 
     to_remove = get_stats_and_features_to_remove(word_count, all_ngrams)
     all_ngrams = remove_features(all_ngrams, to_remove)
@@ -175,9 +172,9 @@ def main(argv):
     print 'After dimensionality reduction, num_features is ', len(all_ngrams)
     doc_vec_str, non_zero_entries = process_vectors(document_vectors)
 
-    # Remove once done debug
-    return
-
+    # First line of matfile needs to contain (num_docs, num_columns, num_non_zero_entries)
+    num_docs = len(docs)
+    num_columns = len(all_ngrams)
 
     # Write results to matfile
     target = open(matfilename, 'w')
@@ -186,11 +183,15 @@ def main(argv):
         target.write(vec_str)
     target.close()
 
+    print 'matfile written'
+
     #Write .clabel file
     target = open(matfilename + '.clabel', 'w')
     for i in range(len(all_ngrams)):
         target.write(str(all_ngrams[i]) + '\n')
     target.close()
+
+    print '.clabel written'
 
 
 if __name__ == "__main__":

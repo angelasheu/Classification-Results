@@ -279,6 +279,7 @@ def main(argv):
     fo.close();
     docs = file_content.split('\n')[:-1]
 
+    #2nd argument is testfile name
     fo = open(testfile)
     file_content = fo.read()
     fo.close()
