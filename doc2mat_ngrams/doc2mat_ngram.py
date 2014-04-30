@@ -6,7 +6,7 @@ from nltk.stem import PorterStemmer
 from nltk.util import ngrams
 from scipy import stats # Use for dimensionality reduction
 
-num_grams = 1 # n-gram parameter
+num_grams = 3 # n-gram parameter
 ngram_set = set()
 
 '''

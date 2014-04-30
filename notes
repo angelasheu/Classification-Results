@@ -1,8 +1,8 @@
 Performs well on: 
-2, 5, 14 (only 1 test sample though)
+2, 5, 9, 14 (only 1 test sample though)
 
 Performs ok on:
-3, 9 (false pos), 10 (missed one), 13
+3, 10 (missed one), 13
 
 Not that well on:
 6
@@ -12,7 +12,6 @@ Diff v_2 with reduced
 vim -d 10_clusters_v2/cat1/predictions 10_clusters_reduced/cat1/predictions
 vim -d 10_clusters_v2/cat2/predictions 10_clusters_reduced/cat2/predictions
 vim -d 10_clusters_v2/cat3/predictions 10_clusters_reduced/cat3/predictions
-vim -d 10_clusters_v2/cat4/predictions 10_clusters_reduced/cat4/predictions
 vim -d 10_clusters_v2/cat5/predictions 10_clusters_reduced/cat5/predictions
 vim -d 10_clusters_v2/cat6/predictions 10_clusters_reduced/cat6/predictions
 vim -d 10_clusters_v2/cat9/predictions 10_clusters_reduced/cat9/predictions
